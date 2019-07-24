@@ -2,123 +2,122 @@
 
 ----------
 
-**Disclaimer**
+**Aviso legal**
 
-The Windows IoT SDK is a personal project of Emlid community member [Tony Wall](http://community.emlid.com/users/codechief).
+O Windows IoT SDK é um projeto pessoal do membro da comunidade Emlid [Tony Wall](http://community.emlid.com/users/codechief).
 
-For any support please refer to him in the [project thread](http://community.emlid.com/t/windows-10-iot-image-for-navio/381/last).
+Para qualquer suporte, por favor, refira-se a ele no [Tópico do projeto](http://community.emlid.com/t/windows-10-iot-image-for-navio/381/last).
 
-All following text is provided by the project author.
+Todo o texto a seguir é fornecido pelo autor do projeto.
 
-**End of disclaimer**
+**Fim do aviso**
 
 ----------
 
-## Project
+## Projeto
 
-In 2015 Microsoft announced official support for the Raspberry Pi 2 running Windows 10 on their new "IoT" (Internet of Things) platform. Soon after work started on an open source SDK for Navio with the following goals:
+Em 2015, a Microsoft anunciou o suporte oficial para o Raspberry Pi 2 executando o  Windows 10 em sua nova plataforma "IoT" (Internet of Things). Logo após o trabalho começou em um SDK de código aberto para Navio com os seguintes objetivos:
 
- - Enable access to all the great sensors of the Navio HAT for Windows DIY projects.
- - Prove the concept of an autopilot running a Windows OS (quadcopter in stabilized flight mode).
- - Provide the tools necessary for the community to extend existing autopilots to Windows and/or create an entirely new system.
+ - Permitir o acesso a todos os grandes sensores dos projetos Navio HAT para Windows DIY.
+ - Prover o conceito de um piloto automático executando um sistema operacional Windows (quadricoptero no modo de vôo estabilizado).
+ - Forneçer as ferramentas necessárias para a comunidade ampliar os pilotos automáticos existentes para o Windows e/ou criar um sistema totalmente novo.
 
-This document describes how to develop your own code for Navio running on Windows 10 IoT, or just try-out the test and sample apps for yourself. You can follow the progress at the [Emlid forum thread](http://community.emlid.com/t/windows-10-iot-image-for-navio/381/last) or the [Hackster.io project](https://www.hackster.io/team-code-for-robots/navio-sdk-for-windows-iot). If you like it please "respect" the Hackster project to return some kudos to the creator ;-)
-
-
-## Getting Started
-
-This section describes how to start development by installing Windows IoT on your device, Visual Studio on your PC, then finally how to clone, build and run the code.
+Este documento descreve como desenvolver seu próprio código para o Navio em execução no Windows 10 IoT, ou apenas experimentar o teste e os aplicativos de amostra para você mesmo. Você pode acompanhar o progresso no [Tópico do fórum Emlid](http://community.emlid.com/t/windows-10-iot-image-for-navio/381/last) ou no [Projeto Hackster.io](https://www.hackster.io/team-code-for-robots/navio-sdk-for-windows-iot). Se você gosta, por favor "respeite" o projeto Hackster para envie alguns elogios ao criador ;-)
 
 
-### Tools
+## Introdução
 
-Links to download the development tools and basic instructions what to install are provided by Microsoft here:
-
-[Getting Started with Windows IoT](http://ms-iot.github.io/content/en-US/GetStarted.htm)
-
-The "IoT Dashboard" tool eases the process of downloading the OS image to the Raspberry Pi 2, then helps you connect and configure devices over the network. End-users need only install the dashboard, or you could provide them with a preloaded SD card.
-
-Alternatively you can download the ISO image and release notes here:
-
-[Other Downloads](http://ms-iot.github.io/content/en-US/Downloads.htm)
-
-Since device driver source code has been added to the solution, you will also need to install the latest Windows Driver Kit (WDK) available in the "Install WDK 10" link on this page:
-
-[Driver Kit Downloads](https://msdn.microsoft.com/en-US/windows/hardware/dn913721%28v=vs.8.5%29.aspx?f=255&MSPPError=-2147217396)
+Esta seção descreve como iniciar o desenvolvimento instalando o Windows IoT em seu dispositivo, o Visual Studio em seu PC e, finalmente, como clonar, criar e executar o código.
 
 
-## Development
+### Ferramentas
 
-The current Navio SDK "framework" is a Windows Universal library, so can be consumed by any Windows Universal application written in any .NET language supported by IoT. Simply use the NuGet Package Manager of Visual Studio to add the [Emlid.WindowsIot.Hardware](https://www.nuget.org/packages/Emlid.WindowsIoT.Hardware) package, then write some code with the various Navio*Device classes to utilize the hardware.
+Links para baixar as ferramentas de desenvolvimento e instruções básicas sobre o que instalar são fornecidos pela Microsoft aqui:
 
-Deployment is easy with the Visual Studio produced Windows Universal packages. They are precompiled and load directly onto the IoT device. You can deploy them via Visual Studio during development, via the web interface for end users, script them with PowerShell or include them on a preloaded SD card image.
+[Introdução ao Windows IoT](http://ms-iot.github.io/content/en-US/GetStarted.htm)
 
+A ferramente  "IoT Dashboard" facilita o processo de download da imagem do SO para o Raspberry Pi 2, ajudando você a se conectar e configurar dispositivos pela rede. Os usuários finais precisam apenas instalar o painel, ou você pode fornecer um cartão SD pré-carregado.
 
-### Preparation
+Alternativamente, você pode baixar a imagem ISO e as notas de lançamento aqui:
 
-It is strongly recommended you complete some basic training before attempting to build and deploy your first IoT project. Even experienced Windows developers will have to get to grips with some of the special build and deployment requirements for the ARM processor and remote IoT device connections. Also the IoT system is still under early development, even though the desktop Windows 10 builds are finished.
+[Outros Downloads](http://ms-iot.github.io/content/en-US/Downloads.htm)
 
- 1. Follow instructions to build, deploy and debug Microsoft's [IoT "Hello World" sample](http://ms-iot.github.io/content/en-US/win10/samples/HelloWorld.htm).
- 2. In Visual Studio open the "Tools - Extensions and Updates..." dialog.
- 3. Select the "Updates" tab then update the GitHub extension and "Windows IoT Core Project Templates".
- 4. Optionally update all others items (multiple starts will be necessary).
-Update the GitHub extension (menu "Tools - Extensions and Updates...").
- 5. Select the "Online" tab, search for then install the "Productivity Power Tools 2015" extension.
+Como o código fonte do driver do dispositivo foi adicionado à solução, você também precisará instalar o WDK (Windows Driver Kit) mais recente disponível no link  "Instalar o WDK 10" nesta página:
+
+[Downloads do kit de drivers](https://msdn.microsoft.com/en-US/windows/hardware/dn913721%28v=vs.8.5%29.aspx?f=255&MSPPError=-2147217396)
 
 
-### Building the SDK from Source
+## Desenvolvimento
 
-1. Click "Team Explorer" then the "Plug" icon (manage connections).
-2. Under "Local Git Repositories" click the "Clone" link then enter the URL of the GitHub project "[https://github.com/emlid/Navio-SDK-Windows-IoT](https://github.com/emlid/Navio-SDK-Windows-IoT)", choose a local path into which the files will be downloaded then the "Clone" button.
-3. Open the solution by selecting the "File - Open - Project/Solution..." menu option then the solution (.sln) file from the local repository directory you just cloned.
-4. In the Solution Explorer window, right-click the solution root then select "Power Commands - Open Command Prompt" and enter the commands:
+A "estrutura" atual do Navio SDK é uma biblioteca do Windows Universal, portanto, pode ser consumido por qualquer aplicativo do Windows Universal escrito em qualquer linguagem .NET suportada pelo IoT. Basta usar o gerenciador de pacotes NuGet do Visual Studio para adicionar o pacote [Emlid.WindowsIot.Hardware](https://www.nuget.org/packages/Emlid.WindowsIoT.Hardware) e, em seguida, escrever um código com várias classes de dispositivos Navio para utilizar o hardware.
+
+A implantação é fácil com os pacotes do Windows Universal produzidos pelo Visual Studio. Eles são pré-compilados e carregados diretamente no dispositivo IoT. Você pode implantá-los via Visual Studio durante o desenvolvimento, por meio da interface da Web para usuários finais, roteirá-los com o PowerShell ou incluí-los em uma imagem de cartão SD pré-carregada.
+
+
+### Preparação
+
+É altamente recomendável que você conclua algum treinamento básico antes de tentar criar e implantar seu primeiro projeto de IoT. Até mesmo desenvolvedores experientes do Windows terão de se familiarizar com alguns dos requisitos especiais de contrução e implantação para o processador ARM e conexões remotas de dispositivos IoT. Além disso, o sistema IoT ainda está em desenvolvimento inicial, mesmo que as compilações de desktop do Windows 10 estejam concluídas.
+
+ 1. Siga as instruções para criar, implantar e debug o exemplo [Amostra IoT "Olá Mundo](http://ms-iot.github.io/content/en-US/win10/samples/HelloWorld.htm).
+ 2. No Visual Studio, abra a caixa de diálogo "Tools - Extensions and Updates...".
+ 3. Selecione a guia "Updates (Atualizações)" e atualize a extensão do GitHub  e "Modelos de projeto do Windows IoT Core".
+ 4. Opcionalmente, atualize todos os outros itens (várias atualizações serão necessárias).
+Atualize a extensão GitHub (menu "Tools - Extensions and Updates...").
+ 5. Selecione a guia "Online", pesquise e instale a extensão "Productivity Power Tools 2015" extension.
+
+
+### Construindo o SDK a partir da fonte
+
+1. Clique em "Team Explorer" e depois no ícone "Plug" icon (gerenciar conexões).
+2. Em "Local Git Repositories", clique no link "Clone" e, em seguida, insira o URL do projeto  GitHub"[https://github.com/emlid/Navio-SDK-Windows-IoT](https://github.com/emlid/Navio-SDK-Windows-IoT)", escolha um diretório no qual os arquivos serão salvos, em seguida, clique no botão "Clone".
+3. Abra a solução selecionando a opção de menu "File - Open - Project/Solution..." e, em seguida, o arquivo de solução (.sln) do diretório que você acabou de clonar.
+4. Na janela Solution Explorer, clique com o botão direito do mouse na raiz da solução e selecione "Power Commands - Open Command Prompt" e insira os comandos:
   ```
   cd Tools\Scripts
   PowerShell.exe -File "Setup Local.ps1"
   exit
   ```
-5. On the build toolbar, ensure that "Debug" configuration and "ARM" platform is selected.
-6. In the "Build" menu select "Rebuild Solution". 
-7. Some NuGet packages may be loaded, then the build will start and should complete without any errors.
+5. Na barra de ferramentas de construção, verifique se a consfiguração "Debug" e a plataforma "ARM" estão selecionadas.
+6. No menu "Build", selecione "Rebuild Solution". 
+7. Alguns pacotes do NuGet podem ser carregados, então a compilação será iniciada e deverá ser concluída sem erros.
 
 
-### Build and Run the Hardware Test App
+### Crie e execute o aplicativo de teste de hardware
 
-The Hardware Test app is currently only distributed as source. Later it will also be available for stand-alone use (without any development tools).
+Atualmente, o aplicativo Hardware Test é distribuído apenas como fonte. Mais tarde, também estará disponível para uso independente (sem ferramentas de desenvolvimento).
 
-1. Ensure the Remote Debugging Tools are running on the IoT device. Use the web interface (easily accessible via the dashboard tool) "Debugging" page to start it and also check the remote name and port, which must match in your deployment configuration.
-2. On the build toolbar, ensure the "ARM" processor is selected and the "Navio Hardware Test" startup project.
-3. Click the drop-down arrow next to the green "play" icon, then "Remote Machine".
-4. If this is the first time you deployed to a remote machine the configuration dialog will appear, then you should enter the "name:port" of the target device and choose no authentication.
-5. With the remote machine still selected, click the "Play" icon to build, deploy and run the sample.
-6. The solution should compile, deploy and run on the Navio/RasPi. Use the mouse to select "LED & PWM" (the rest is not implemented yet). Check the frequency, set some sliders (best PWM near bottom) then click the Output ON.
-7. Play with the sliders to test your LED and servos/ESCs.
-8. Monitor the output window for any messages, and look at the physical device for any feedback, e.g. LED colours or servo movement.
-9. Click "Close" then "Exit" to finish.
-
-
-### Build and Run the Samples
-
-Currently the sample applications are "Background Application" projects, which means they run directly from Visual Studio with no UI. All output is sent back via debug messages to the Visual Studio "Output" window.
-
-1. Ensure the Remote Debugging Tools are running on the IoT device. Use the web interface (easily accessible via the dashboard tool) "Debugging" page to start it and also check the remote name and port, which must match in your deployment configuration.
-2. On the build toolbar, ensure the "ARM" processor is selected and the "Navio Hardware Test" startup project.
-3. Click the drop-down arrow next to the green "play" icon, then "Remote Machine".
-4. If this is the first time you deployed to a remote machine the configuration dialog will appear, then you should enter the "name:port" of the target device and choose no authentication.
-5. With the remote machine still selected, click the "Play" icon to build, deploy and run the sample.
-
-Monitor the output window for any messages, and look at the physical device for any feedback, e.g. LED colours or servo movement.
+1. Certifique-se de que as ferramentas remotas de debugging estejam em execução no dispositivo. Use a página "Debugging" da web (facilmente acessível através da ferramenta do painel) e a porta remota, que devem corresponder em sua configuração de implantação.
+2. Na barra de ferramentas de contrução, verifique se o processador "ARM" e o projeto de inicialização "Navio Hardware Test" estão selecionados.
+3. Clique na seta suspensa ao lado do ícone verde "Play (reproduzir)" e depois em "Remote Machine (Máquina remota)".
+4. Se está é a priemeira vez que você implementa em uma máquina remota, a caixa de diálogo de configuração aparecerá, então você deverá digitar o  "nome:porta" do dispositivo de destino e escolher nenhuma autenticação.
+5. Com a máquina remota ainda selecionada, clique no ícone "Play" para construir, implantar e executar a amostra.
+6. A solução deve compilar, implantar e executar no Navio/RasPi. Use o mouse para selecionar "LED & PWM" (o restante ainda não está implementado). Verifique a frequência, defina alguns controles deslizantes (melhor PWM próximo ao fundo) e clique no botão Output ON.
+7. Jogue com os controles deslizantes para testar seu LED e servos/ESCs.
+8. Monitore a janela de saída para quaisquer mensagens e observe o dispositivo físico em busca de qualquer feedback, por exemplo, cores do LED ou servo movimento.
+9. Clique em "Close (Fechar)" e depois em then "Exit (sair)" para finalizar.
 
 
-## Known Issues
+### Construa e execute as amostras
 
-1. Since Update 1 and IoT build 10586 it is necessary to manually start the remote debugging tools via the web interface before deployment will be successful. Also the remote machine name must be edited to include the port of the remote debugger, which appears in the confirmation dialog when starting them via the web interface, e.g. MyDeviceName:8116.
-2. RC Input is super slow because we are in the middle of conversion to C++ and drivers. Software decoding is too slow and unreliable in user mode on the Raspberry Pi, so it is delayed until after all the other components are implemented. Navio2 may be supported first because it has decoding hardware.
+Atualmente as aplicações do projeto são "Aplicativo de Plano de Fundo", o que significa que eles são executados diretamente do Visual Studio sem interface com usuário. Toda a saída é enviada de volta via mensagens de debug para a janela "Output (Saída)" do Visual Studio.
+
+1. Certifique-se de que as ferramentas remotas de debugging estejam em execução no dispositivo. Use a página "Debugging" da web (facilmente acessível através da ferramenta do painel) e a porta remota, que devem corresponder em sua configuração de implantação.
+2. Na barra de ferramentas de contrução, verifique se o processador "ARM" e o projeto de inicialização "Navio Hardware Test" estão selecionados.
+3. Clique na seta suspensa ao lado do ícone verde "Play (reproduzir" e, em seguida, em "Remote Machine (Máquina remota)".
+4. Se está é a primeira vez que você implementa em uma máquina remota, a caixa de diálogo de configuração aparecerá, então você deve digitar "nome:porta" do dispositivo de destino e escolher nenhuma autenticação.
+5. Com a máquina remota ainda selecionada, clique no ícone "Play" para construir, implantar e executar a amostra.
+
+Monitore a janela de saída para quaisquer mensagens e observe o dispositivo físico em busca de qualquer feedback, por exemplo, cores dos LEDS ou servo movimento.
 
 
-## Roadmap
+## Problemas conhecidos
 
-The current framework release is known as the "user mode" framework. Later it will be converted into a Windows Runtime Component so it it can be consumed by other languages than .NET, such as native C++ and NodeJS. The development language will also switch to lower-level C++ runtime components which will work in tandem with new Navio specific device drivers for performance and reliability. Once device drivers are available, a custom IoT image will also be produced to ease installation. OEM build instructions will also be included so you can integrate the individual drivers into your own IoT image.
+1. Desde a atualização 1 e a IoT 10586, é necessário iniciar manualmente as ferramentas remotas de debugging por meio da interface da web, antes que a implantação seja bem-sucedida. Além disso, o nome da máquino remota deve ser editada para incluir a porta remota do debugger, que aparece na caixa de diálogo de confirmação ao iniciá-los através da interface da web, por exemplo MyDeviceName:8116.
+2. A saída RC é super lenta porque estamos no meio da conversão para C++ e drivers. A decodificação de software é muito lenta e não confiável no modo de usuário no Raspberry Pi, por isso é adiada até que todos os outros componentes sejam implementados. O Navio2 pode ser suportado priemiro porque possui hardware de decodificação.
+
+## Roteiro
+
+A versão atual da estrutura é conhecida como "estrutura modo do usuário". Posteriormente, ela será convertido em um componente de tempo de execução do Windows para que possa ser consumido por outros idiomas além do .NET, como o C++ nativo e o NodeJS. A linguagem de desenvolvimento também mudará para componentes de tempo de execução C++ de nível inferior, que trabalharão em consjunto com os novos drivers de dispositivo específico do Navio para desempenho e confiabilidade. Quando os drivers de dispositivo estiverem disponíveis, uma imagem personalizada de IoT também será produzida para facilitar a instalação. As instruções de criação de OEM também serão incluídas para que você possa integrar os drivers individuais à sua própria imagem de IoT.
 
 The framework will remain, but the Navio*Device classes will be redirected to call the new lower level components. However it is inevitable that some breaking changes will occur. At least the user mode framework will continue to run on standard IoT images (without drivers installed) so you have to possibility to stay with the older NuGet package versions and upgrade when it suits you.
 
