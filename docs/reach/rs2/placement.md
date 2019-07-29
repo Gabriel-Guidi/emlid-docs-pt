@@ -28,7 +28,7 @@ Examples of **bad** environments for Reach placement:
 * forestry area
 
 
-### No electronics nearby
+### Sem eletrônicos próximos
 
 Electronic devices may produce RF noise that could affect the reception of the GNSS signal. Keep all electronics as far as possible from Reach.
 
