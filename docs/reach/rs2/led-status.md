@@ -20,7 +20,7 @@ The lights above the power button indicate the level of the battery charge.
 | <br><br><br><br> <div style="text-align: center;">    Turning OFF   </div> |  <br>  <div style="text-align: center;"><img src="../img/reachrs2/led-status/turning-off.gif" style="height: 150px;"></div>  |
 
 
-## Network LED
+## LED de rede
 
 During boot, Reach RS2 enters a network scan state in which it searches for known networks to connect to. If it doesn’t find a known network, it switches to hotspot mode.
 
