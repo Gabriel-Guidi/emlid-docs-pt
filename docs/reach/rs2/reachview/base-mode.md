@@ -1,81 +1,85 @@
-## Correction output
+## Correction output (Saída de correção)
 
 <p style="text-align:center"><img src="../img/reachview/base-mode/output.png" style="width: 800px;"/></p>
 
-Reach outputs correction in industry standard RTCM3 format. Correction data can be sent via Serial, TCP, NTRIP or LoRa.
+A saída de correção do Reach é no formato RTCM3, pradrão da industria. Os dados de correção podem ser enviados via Serial, TCP, NTRIP ou LoRa.
 
 ### Serial
-Serial port connection is available through several hardware connection options. All of them support the following baud rates: 4800, 9600, 14400, 19200, 28800, 38400, 56000, 57600, 115200, 128000, 153600, 230400, 256000, 460800.
+A conexão da porta serial está disponível através de várias opções de conexão de hardware. Todos eles suportam as seguintes taxas de transmissão: 4800, 9600, 14400, 19200, 28800, 38400, 56000, 57600, 115200, 128000, 153600, 230400, 256000, 460800.
 
 #### UART
-Corresponds to RS232 port on Reach RS2 extension connector. Common way to connect to radio to send correction data.
+Corresponde à porta RS232 no Reach RS2. Maneira comum de conectar ao rádio para enviar dados de correção.
 
-#### USB-to-PC
-When connected over USB to a PC Reach will show up as several devices, one of them will be a serial port. You can use this serial port to send correction data to the PC.
+#### USB para PC
+Quando conectado via USB a um PC, Reach será exibido como vários dispositivos, um deles será uma porta serial. Você pode usar esta porta serial para enviar dados de correção para o PC.
 
 #### USB OTG
-Use a micro-USB OTG cable to connect USB accessories. In this mode only USB devices that emulate a serial port could be used. Example of popular chips that are supported: FT232, CP2102. There are numerous devices built on these chips that will provide you a TTL UART or RS232 port. 
+Use um cabo OTG micro-USB para conectar acessórios USB. Nesse modo, apenas os dispositivos USB que emulam uma porta serial podem ser usados. Exemplo de chips populares suportados: FT232, CP2102. Existem vários dispositivos criados nesses chips que fornecerão uma porta TTL UART ou RS232. 
 
 ### NTRIP
-NTRIP is industry standard way of transferring GNSS corrections over Internet, with ReachView you can use any public service or your own private caster. NTRIP does not support point-to-point communication e.g. you can not use it to transfer corrections from one Reach to another directly. In NTRIP terminology there are servers, clients and caster. Server sends correction to a caster and clients can receive them by connecting to that caster.
+O NTRIP é a maneira padrão da industria de tranferir correções do GNSS pela internet. Com o ReachView, você pode usar qualquer serviço público ou seu próprio caster. O NTRIP não suporta comunicação ponto a ponto, por exemplo você não pode usá-lo para transferir correções de um Reach para outro diretamente. Na terminologia NTRIP, existem servidores, clientes e casters. O servidor envia a correção para um caster e os clientes podem recebê-los conectando-se a esse caster.
 
-In order to send correction to NTRIP caster you need to know: 
+Para enviar a correção para um caster NTRIP, você precisa saber:
 
-- IP address or domain name of the caster
-- Port
-- Username
-- Password
-- Mount point
+- Endereço IP ou nome do domínio do caster
+- Port (Porta)
+- Username (Usuário)
+- Password (Senha)
+- Mount point (Nome do base)
 
-When connecting via NTRIP in base mode Reach acts as a NTRIP server.
+Ao conectar via NTRIP no modo base, o Reach atua como um servidor NTRIP.
 
 ### TCP
-Typical scenario for using TCP is sending correction data to an application on the same network or to a server with public IP. 
+O cenário típico para o uso do TCP é o envio de dados de correção para um aplicativo na mesma rede ou para um servidor com IP público.
 
-TCP supports two roles:
+O TCP suporta duas funções:
 
-#### Server
-You need to specify port and after that clients will be able to connect to this device on it’s IP address. Many clients can be connected to the same server.
-#### Client
-You need to specify IP address of the server and port number.
+#### Servidor
+Você precisa especificar a porta e, depois disso, os clientes poderão se conectar a este dispositivo no endereço IP. Muitos clientes podem estar conectados ao mesmo servidor.
+#### Cliente
+Você precisa especificar o endereço IP do servidor e o número da porta.
 
-If ReachView does not allow to set a certain port number it means that it is reserved for internal use.
+Se o ReachView não permitir definir um determinado número de porta, significa que ele está reservado para uso interno.
 
-### LoRa Radio
-Reach RS2 has internal LoRa radio which is used for receiving or sending corrections. The radio works only in one way, it could either be configured to send corrections (on base) or to receive them (on rover). Using LoRa modulation it is possible to hit up to 8 km in line of sight or a few km in urban areas with just 20 dBm power output. As long as frequency and air rate settings match an unlimited number of rovers can listen for correction from the same base.
+### Radio LoRa
+O Reach RS2 possui um rádio LoRa interno que é usado para receber ou enviar correções. O rádio funciona apenas de uma maneira: ele pode ser configurado para enviar correções (na base) ou recebê-las (em rover). Usando a modulação LoRa, é possível atingir até 8 Km na linha de visão ou alguns Km em áreas urbanas com apenas 20 dBm de potência. Contanto que as configurações de frequência e o air rate correspondam a um número ilimitado de rovers, é possível receber a correção da mesma base.
 
-The lower the air rate, the longer the working distance will be. Depending on your RTCM3 messages selection ReachView will automatically block insufficient air rates. Disable correction messages or reduce rate in order to unlock lower air rates. Air rate on transmitting Reach and on receiving must match.
+Quanto menor o air rate, maior será a distância de trabalho. Dependendo da sua seleção de mensagens RTCM3, o ReachView bloqueará automaticamente as taxas de air insuficientes. Desative as mensagens de correção ou reduza a taxa para desbloquear taxas de air mais baixas. A taxa de air na transmissão do Reach e na recepção devem se corresponder.
 
-Make sure to select appropriate output power and frequency according to your local regulations.
+Certifique-se de selecionar a potência e a frequência de saída apropriadas, de acordo com os regulamentos locais.
 
 ### Bluetooth
-You can use Bluetooth for correction output. Note that you can’t set both position output and base correction output to Bluetooth at the same time.
+Você pode usar o Bluetooth para a saída de correção. Observe que você não pode definir a saída de posição e a saída de correção básica para Bluetooth ao mesmo tempo.
 
-## RTCM3 messages
+## Mensagens RTCM3
 
 <p style="text-align:center"><img src="../img/reachview/base-mode/messages.png" style="width: 800px;"/></p>
-The minimal subset that is required for RTK to function is 1074 message for 1Hz with GPS observations and 1006 message for 0.1Hz with base station antenna position. Enabling more messages or higher rates requires higher connection bandwidth.
+O subconjunto mínimo de mensagens necessário para o RTK funcionar são as mensagens 1074 em 1 Hz com observações GPS e a mensagens 1006 em 0,1 Hz com a posição da antena da base. A ativação de mais mensagens ou taxas mais altas requer maior largura de banda de conexão.
 
-In the Data rate row you can find an estimation of bytes/sec for 1 satellite when messages are configured at 1 Hz.
+Em taxa de dados, você pode encontrar uma estimativa de bytes/s para 1 satélite quando as mensagens são configuradas em 1 Hz.
 
-|RTCM3 messages|Message type|Data rate, bytes/sec (1 satellite, 1Hz)|
+|Mensagens RTCM3|Tipo de mensagem|Taxa de dados, bytes/sec (1 satélite, 1Hz)|
 |:---:|:---:|:---:|
-||**Minimal required messages**||
+||**Mensagens necessárias**||
 |1006|ARP station coordinate   | 27|
 |1074|GPS MSM4      |19.38|
-||**Optional messages for other GNSS **||
+||**Mensagens opcionais para outros GNSS **||
 |1084|GLONASS MSM4|19.38|
 |1094|Galileo MSM4|9.58|
 |1124|BeiDou MSM4|18.9|
 
 
-Here is some information about each message from RTCM STANDARD 10403.3<sup>[1](#myfootnote1)</sup>:
+Aqui estão algumas informações sobre cada mensagem do padrão RTCM 10403.3¹<sup>[1](#myfootnote1)</sup>:
 
-- **Message Type 1006** provides the earth-centered, earth-fixed (ECEF) coordinates of the antenna reference point (ARP) for a stationary reference station and the height of the ARP above a survey monument. It is the mandatory message to turn on.
+- **Mensagem 1006** fornece as coordenadas (ECEF) do ponto de referência da antena (ARP) para uma estação de referência estacionária e a altura do ARP acima de um monumento. É a mensagem obrigatória para ativar.
 
-- **Messages 1074 (GPS), 1084(GLONASS), 1094 (Galileo), 1124 (BeiDou)** are MSM4 (Multiple Signal Messages). MSM4 are high precision messages which contain a complete set of RINEX observations with extended resolution. That means that you should turn on only one message of the choosen system to get all data about it. It is recommended to keep enabled at least GPS 1074 message.
+- **Mensagens 1074 (GPS), 1084(GLONASS), 1094 (Galileo), 1124 (BeiDou)** são MSM4 (Multiple Signal Messages). MSM4 são mensagens de alta precisão que contêm um conjunto completo de observações RINEX com resolução estendida. Isso significa que você deve ativar apenas uma mensagem do sistema escolhido para obter todos os dados sobre ele. Recomenda-se manter ativada pelo menos a mensagem GPS 1074.
 
-## Base position
+## Base position (Posição da base)
+
+
+!!! tip ""
+    [Check the Placing the base guide](https://docs.emlid.com/reachrs2/common/tutorials/placing-the-base/) to learn about different ways to set up your base.  
 
 <p style="text-align:center"><img src="../img/reachview/base-mode/position.jpg" style="width: 800px;"/></p>
 
@@ -104,5 +108,3 @@ After you have successfully obtained averaged position you might want to save it
 If you would like to restart base position averaging process you can click on “repeat averaging” icon. This is especially useful in a situation when you accidentally moved Reach during averaging.
 
 <p style="font-size:70%;"><a name="myfootnote1">1</a>: Radio Technical Commission for Maritime Services. 2016. RTCM STANDARD 10403.3 DIFFERENTIAL GNSS (GLOBAL NAVIGATION SATELLITE SYSTEMS) SERVICES – VERSION 3. Virginia: Radio Technical Commission for Maritime Services, pp. 108-262</p>
-
-
